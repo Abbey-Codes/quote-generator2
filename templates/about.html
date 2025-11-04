@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Us | QuoteGenerator</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    /* ===== RESET ===== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background-color: #fff;
+      color: #111;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+      text-align: center;
+    }
+
+    /* ===== HEADER ===== */
+    header {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      padding: 10px 20px;
+      background: #fff;
+      position: fixed;
+      top: 0;
+      left: 0;
+      border-bottom: 1px solid #eee;
+      z-index: 1000;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 700;
+      font-size: 1rem;
+    }
+
+    .logo i {
+      font-size: 1.2rem;
+    }
+
+    /* ===== MAIN CONTENT ===== */
+    main {
+      margin-top: 80px;
+      max-width: 400px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    h1 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    p {
+      font-size: 0.95rem;
+      color: #444;
+      line-height: 1.5rem;
+      margin-bottom: 20px;
+    }
+
+    .about-box {
+      background-color: #f6f6f6;
+      border-radius: 10px;
+      padding: 25px 20px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+      margin-bottom: 25px;
+    }
+
+    .team-member {
+      background-color: #e5e5e5;
+      border-radius: 8px;
+      padding: 10px;
+      margin-top: 10px;
+      font-weight: 500;
+    }
+
+    /* ===== FOOTER NAV ===== */
+    footer {
+      margin-top: auto;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      position: fixed;
+      bottom: 15px;
+      background: transparent;
+    }
+
+    .footer-btn {
+      background-color: #000;
+      color: #fff;
+      border: none;
+      border-radius: 20px;
+      padding: 10px 20px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+
+    .footer-btn:hover {
+      background-color: #333;
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== HEADER ===== -->
+  <header>
+    <div class="logo">
+      <i class="fa-solid fa-quote-left"></i>
+      <span>QuoteGenerator</span>
+    </div>
+  </header>
+
+  <!-- ===== MAIN CONTENT ===== -->
+  <main>
+    <div class="about-box">
+      <h1>About QuoteGenerator</h1>
+      <p>
+        QuoteGenerator was created to inspire people every day with meaningful words
+        from great minds throughout history. You can generate random quotes, save
+        your favorites, and come back to revisit them whenever you need motivation.
+      </p>
+    </div>
+
+    <div class="about-box">
+      <h1>Our Mission</h1>
+      <p>
+        We believe in the power of words to change perspectives and uplift spirits.
+        Our mission is to make timeless wisdom easily accessible for everyone.
+      </p>
+    </div>
+
+    <div class="about-box">
+      <h1>Meet the Team</h1>
+      <div class="team-member">💡 Alex Johnson — Developer</div>
+      <div class="team-member">🎨 Maria Lopez — Designer</div>
+      <div class="team-member">📚 Sam Carter — Content Curator</div>
+    </div>
+  </main>
+
+  <!-- ===== FOOTER NAV ===== -->
+  <footer>
+    <button class="footer-btn" onclick="window.location.href='index.html'">Home</button>
+    <button class="footer-btn" onclick="window.location.href='quote.html'">Generate Quote</button>
+    <button class="footer-btn" onclick="window.location.href='favorites.html'">Favorites</button>
+  </footer>
+
+</body>
+</html>

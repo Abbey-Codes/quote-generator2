@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>QuoteGenerator</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    /* ===== RESET ===== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background-color: #fff;
+      color: #111;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    /* ===== NAVBAR ===== */
+    header {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 20px;
+      border-bottom: 1px solid #eee;
+      position: fixed;
+      top: 0;
+      left: 0;
+      background: #fff;
+      z-index: 1000;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-weight: 700;
+      font-size: 1rem;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #000;
+      margin-left: 15px;
+      font-weight: 500;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    /* ===== MAIN CONTENT ===== */
+    main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      margin-top: 80px;
+      width: 100%;
+    }
+
+    .quote-box {
+      background-color: #f7f7f8;
+      border-radius: 10px;
+      padding: 30px 20px;
+      margin-bottom: 30px;
+      width: 90%;
+      max-width: 350px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+
+    .quote-text {
+      font-size: 1rem;
+      font-style: italic;
+      color: #222;
+      margin-bottom: 15px;
+    }
+
+    .quote-author {
+      font-size: 0.9rem;
+      color: #555;
+    }
+
+    /* ===== BUTTONS ===== */
+    .btn {
+      background-color: #000;
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      padding: 12px 20px;
+      width: 80%;
+      max-width: 300px;
+      margin-bottom: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+
+    .btn:hover {
+      background-color: #333;
+      transform: scale(1.03);
+    }
+
+    /* ===== BOTTOM NAV ===== */
+    footer {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      background-color: #fff;
+      border-top: 1px solid #eee;
+      padding: 10px 0;
+    }
+
+    footer i {
+      font-size: 1.2rem;
+      color: #000;
+    }
+
+    footer i:hover {
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== HEADER ===== -->
+  <header>
+    <div class="logo">
+      <i class="fa-solid fa-house"></i>
+      <span>QuoteGenerator</span>
+    </div>
+    <nav>
+      <a href="#">Home</a>
+      <a href="#">Favorites</a>
+    </nav>
+  </header>
+
+  <!-- ===== MAIN CONTENT ===== -->
+  <main>
+    <div class="quote-box" id="quote-box">
+      <p class="quote-text" id="quote">"The only limit to our realization of tomorrow is our doubts of today."</p>
+      <p class="quote-author" id="author">- Franklin D. Roosevelt</p>
+    </div>
+
+    <button class="btn" id="newQuote">Generate New Quote</button>
+    <button class="btn" id="saveFavorite">Save to Favorites</button>
+  </main>
+
+  <!-- ===== FOOTER NAV ===== -->
+  <footer>
+    <i class="fa-solid fa-house"></i>
+    <i class="fa-solid fa-heart"></i>
+  </footer>
+
+  <script>
+    const quotes = [
+      { text: "The only limit to our realization of tomorrow is our doubts of today.", author: "Franklin D. Roosevelt" },
+      { text: "In the middle of every difficulty lies opportunity.", author: "Albert Einstein" },
+      { text: "Act as if what you do makes a difference. It does.", author: "William James" },
+      { text: "Success is not final, failure is not fatal: it is the courage to continue that counts.", author: "Winston Churchill" },
+      { text: "Believe you can and you're halfway there.", author: "Theodore Roosevelt" },
+      { text: "Happiness is not something ready-made. It comes from your own actions.", author: "Dalai Lama" }
+    ];
+
+    const quoteEl = document.getElementById("quote");
+    const authorEl = document.getElementById("author");
+    const newQuoteBtn = document.getElementById("newQuote");
+    const saveBtn = document.getElementById("saveFavorite");
+
+    // Load favorites from localStorage
+    let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+
+    function generateQuote() {
+      const randomIndex = Math.floor(Math.random() * quotes.length);
+      const quote = quotes[randomIndex];
+      quoteEl.textContent = `"${quote.text}"`;
+      authorEl.textContent = `- ${quote.author}`;
+    }
+
+    function saveFavorite() {
+      const currentQuote = quoteEl.textContent;
+      const currentAuthor = authorEl.textContent;
+      const favorite = { text: currentQuote, author: currentAuthor };
+      favorites.push(favorite);
+      localStorage.setItem("favorites", JSON.stringify(favorites));
+      alert("Quote saved to favorites!");
+    }
+
+    newQuoteBtn.addEventListener("click", generateQuote);
+    saveBtn.addEventListener("click", saveFavorite);
+  </script>
+
+</body>
+</html>

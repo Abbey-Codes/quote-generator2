@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>QuoteGenerator</title>
+  <style>
+    /* ====== RESET & BASE STYLES ====== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      min-height: 100vh;
+      padding: 40px 20px;
+      background-color: #fff;
+      color: #111;
+      text-align: center;
+    }
+
+    /* ====== HEADER SECTION ====== */
+    h1 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    h1 span {
+      font-weight: 700;
+    }
+
+    p.description {
+      font-size: 0.9rem;
+      line-height: 1.4rem;
+      max-width: 320px;
+      margin-bottom: 30px;
+    }
+
+    /* ====== BUTTON STYLES ====== */
+    .btn {
+      background-color: #000;
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      padding: 14px 24px;
+      font-weight: 600;
+      width: 90%;
+      max-width: 350px;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+
+    .btn:hover {
+      background-color: #333;
+      transform: scale(1.02);
+    }
+
+    /* ====== FOOTER NAV ====== */
+    .nav {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      max-width: 400px;
+      margin-top: 40px;
+      font-size: 0.9rem;
+    }
+
+    .nav a {
+      color: #000;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .nav a:hover {
+      text-decoration: underline;
+    }
+
+    /* ====== QUOTE DISPLAY ====== */
+    #quote-box {
+      margin-top: 25px;
+      font-style: italic;
+      font-size: 1rem;
+      min-height: 60px;
+      color: #444;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Welcome to<br><span>QuoteGenerator</span></h1>
+  <p class="description">
+    Discover and save your favorite quotes.<br>
+    Generate random quotations to inspire your day!
+  </p>
+
+  <button class="btn" id="generateBtn">Generate Random Quote</button>
+
+  <div id="quote-box"></div>
+
+  <div class="nav">
+    <a href="#">Favorite Quotes</a>
+    <a href="#">About Us</a>
+  </div>
+
+  <script>
+    const quotes = [
+      "The best way to predict the future is to create it. – Peter Drucker",
+      "In the middle of difficulty lies opportunity. – Albert Einstein",
+      "Do what you can, with what you have, where you are. – Theodore Roosevelt",
+      "Believe you can and you're halfway there. – Theodore Roosevelt",
+      "Act as if what you do makes a difference. It does. – William James"
+    ];
+
+    const quoteBox = document.getElementById('quote-box');
+    const generateBtn = document.getElementById('generateBtn');
+
+    generateBtn.addEventListener('click', () => {
+      const randomIndex = Math.floor(Math.random() * quotes.length);
+      quoteBox.textContent = quotes[randomIndex];
+    });
+  </script>
+
+</body>
+</html>
