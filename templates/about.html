@@ -151,17 +151,17 @@
 
     <div class="about-box">
       <h1>Meet the Team</h1>
-      <div class="team-member">💡 Alex Johnson — Developer</div>
-      <div class="team-member">🎨 Maria Lopez — Designer</div>
+      <div class="team-member">💡 Olaore Abiodun — Developer</div>
+      <div class="team-member">🎨 Olaore Abiodun — Designer</div>
       <div class="team-member">📚 Sam Carter — Content Curator</div>
     </div>
   </main>
 
   <!-- ===== FOOTER NAV ===== -->
   <footer>
-    <button class="footer-btn" onclick="window.location.href='index.html'">Home</button>
-    <button class="footer-btn" onclick="window.location.href='quote.html'">Generate Quote</button>
-    <button class="footer-btn" onclick="window.location.href='favorites.html'">Favorites</button>
+    <button class="footer-btn" onclick="window.location.href='{{ url_for('index') }}'">Home</button>
+    <button class="footer-btn" onclick="window.location.href='{{ url_for('quote') }}'">Generate Quote</button>
+    <button class="footer-btn" onclick="window.location.href='{{ url_for('favorite') }}'">Favorites</button>
   </footer>
 
 </body>

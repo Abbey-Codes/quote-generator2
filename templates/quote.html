@@ -146,19 +146,20 @@
       <span>QuoteGenerator</span>
     </div>
     <nav>
-      <a href="#">Home</a>
-      <a href="#">Favorites</a>
+      <a href="{{ url_for('index') }}">Home</a>
+      <a href="{{ url_for('favorite') }}">Favorites</a>
+      <a href="{{ url_for('about') }}">About</a>
     </nav>
   </header>
 
   <!-- ===== MAIN CONTENT ===== -->
   <main>
     <div class="quote-box" id="quote-box">
-      <p class="quote-text" id="quote">"The only limit to our realization of tomorrow is our doubts of today."</p>
-      <p class="quote-author" id="author">- Franklin D. Roosevelt</p>
+      <p class="quote-text" id="quote">"{{ quote }}"</p>
+      <p class="quote-author" id="author">- {{ author }}</p>
     </div>
 
-    <button class="btn" id="newQuote">Generate New Quote</button>
+    <button class="btn" id="newQuote" onclick="getNewQuote()">Generate New Quote</button>
     <button class="btn" id="saveFavorite">Save to Favorites</button>
   </main>
 
@@ -169,41 +170,13 @@
   </footer>
 
   <script>
-    const quotes = [
-      { text: "The only limit to our realization of tomorrow is our doubts of today.", author: "Franklin D. Roosevelt" },
-      { text: "In the middle of every difficulty lies opportunity.", author: "Albert Einstein" },
-      { text: "Act as if what you do makes a difference. It does.", author: "William James" },
-      { text: "Success is not final, failure is not fatal: it is the courage to continue that counts.", author: "Winston Churchill" },
-      { text: "Believe you can and you're halfway there.", author: "Theodore Roosevelt" },
-      { text: "Happiness is not something ready-made. It comes from your own actions.", author: "Dalai Lama" }
-    ];
-
-    const quoteEl = document.getElementById("quote");
-    const authorEl = document.getElementById("author");
-    const newQuoteBtn = document.getElementById("newQuote");
-    const saveBtn = document.getElementById("saveFavorite");
-
-    // Load favorites from localStorage
-    let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
-
-    function generateQuote() {
-      const randomIndex = Math.floor(Math.random() * quotes.length);
-      const quote = quotes[randomIndex];
-      quoteEl.textContent = `"${quote.text}"`;
-      authorEl.textContent = `- ${quote.author}`;
+    async function getNewQuote() {
+      const response = await fetch('/random-quote');
+      const data = await response.json();
+      document.getElementById("quote").textContent = `"${data.quote}"`;
+      document.getElementById("author").textContent = `${data.author}`
     }
 
-    function saveFavorite() {
-      const currentQuote = quoteEl.textContent;
-      const currentAuthor = authorEl.textContent;
-      const favorite = { text: currentQuote, author: currentAuthor };
-      favorites.push(favorite);
-      localStorage.setItem("favorites", JSON.stringify(favorites));
-      alert("Quote saved to favorites!");
-    }
-
-    newQuoteBtn.addEventListener("click", generateQuote);
-    saveBtn.addEventListener("click", saveFavorite);
   </script>
 
 </body>
