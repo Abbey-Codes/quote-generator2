@@ -17,7 +17,8 @@ QUOTES = {
 #dk
 @app.route('/')
 def index():
-    return render_template('index.html')
+    quote, author = random.choice(list(QUOTES.items()))
+    return render_template('index.html', quote=quote, author=author)
 
 @app.route("/quote")
 def quote():

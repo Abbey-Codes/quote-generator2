@@ -100,9 +100,9 @@
     Generate random quotations to inspire your day!
   </p>
 
-  <button class="btn" id="generateBtn">Generate Random Quote</button>
+  <button class="btn" id="generateBtn" onclick="getNewQuote()">Generate Random Quote</button>
 
-  <div id="quote-box"></div>
+  <div id="quote-box">"{{ quote }}" - {{ author }}</div>
 
   <div class="nav">
     <a href="{{ url_for('favorite') }}">Favorite Quotes</a>
@@ -110,21 +110,11 @@
   </div>
 
   <script>
-    const quotes = [
-      "The best way to predict the future is to create it. – Peter Drucker",
-      "In the middle of difficulty lies opportunity. – Albert Einstein",
-      "Do what you can, with what you have, where you are. – Theodore Roosevelt",
-      "Believe you can and you're halfway there. – Theodore Roosevelt",
-      "Act as if what you do makes a difference. It does. – William James"
-    ];
-
-    const quoteBox = document.getElementById('quote-box');
-    const generateBtn = document.getElementById('generateBtn');
-
-    generateBtn.addEventListener('click', () => {
-      const randomIndex = Math.floor(Math.random() * quotes.length);
-      quoteBox.textContent = quotes[randomIndex];
-    });
+    async function getNewQuote() {
+      const response = await fetch('/random-quote');
+      const data = await response.json();
+      document.getElementById("quote-box").textContent = `"${data.quote}" - ${ data.author}`;
+    }
   </script>
 
 </body>
