@@ -1,7 +1,8 @@
-from flask import Flask, render_template, redirect, jsonify
+from flask import Flask, render_template, redirect, jsonify, session, url_for, request
 import random
 
 app = Flask(__name__)
+app.secret_key = "your_secret_key"
 
 QUOTES = {
     "The best way to predict the future is to create it": "Peter Drucker",
@@ -14,7 +15,7 @@ QUOTES = {
     "Happiness is not something ready-made. It comes from your own actions.": "Dalai Lama"
 }
 
-#dk
+#dk<
 @app.route('/')
 def index():
     quote, author = random.choice(list(QUOTES.items()))
@@ -30,9 +31,28 @@ def random_quote():
     quote, author = random.choice(list(QUOTES.items()))
     return jsonify({"quote": quote, "author": author})
 
+@app.route('/add_favorite', methods=['POST'])
+def add_favorite():
+    quote = request.form['quote']
+    author = request.form['author']
+
+    # initialise session if empty
+    if 'favorites' not in session:
+        session['favorites'] = []
+
+    favorite = {'quote': quote, 'author': author}
+    if favorite not in session['favorites']:
+        session['favorites'].append(favorite)
+        session.modified = True
+
+
+    return redirect(url_for('quote'))
+
+
 @app.route('/favorite')
 def favorite():
-    return render_template("favorite.html")
+    favorites = session.get('favorites', [])
+    return render_template("favorite.html", favorites=favorites)
 
 @app.route('/about')
 def about():

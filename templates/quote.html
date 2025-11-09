@@ -160,13 +160,17 @@
     </div>
 
     <button class="btn" id="newQuote" onclick="getNewQuote()">Generate New Quote</button>
-    <button class="btn" id="saveFavorite">Save to Favorites</button>
+    <form class="btn" action="{{ url_for('add_favorite') }}" method="post">
+      <input type="hidden" name="quote" value="{{ quote }}">
+      <input type="hidden" name="author" value="{{ author }}">
+      <button class="btn" id="saveFavorite">Save to Favorites</button>
+    </form>
   </main>
 
   <!-- ===== FOOTER NAV ===== -->
   <footer>
-    <i class="fa-solid fa-house"></i>
-    <i class="fa-solid fa-heart"></i>
+    <i class="fa-solid fa-house" href="{{ url_for('index') }}"></i>
+    <i class="fa-solid fa-heart" href="{{ url_for('favorite') }}"></i>
   </footer>
 
   <script>
