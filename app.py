@@ -1,34 +1,53 @@
 from flask import Flask, render_template, redirect, jsonify, session, url_for, request
-import random
+import requests, urllib3
+
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 app = Flask(__name__)
 app.secret_key = "your_secret_key"
 
-QUOTES = {
-    "The best way to predict the future is to create it": "Peter Drucker",
-    "In the middle of difficulty lies opportunity": "Albert Einstein",
-    "Do what you can, with what you have, where you are": "Theodore Roosevelt",
-    "Believe you can and you're halfway there": "Theodore Roosevelt",
-    "Act as if what you do makes a difference. It does": "William James",
-    "The only limit to our realization of tomorrow is our doubts of today.": "Franklin D. Roosevelt",
-    "Success is not final, failure is not fatal: it is the courage to continue that counts.": "Winston Churchill",
-    "Happiness is not something ready-made. It comes from your own actions.": "Dalai Lama"
-}
-
 #dk<
 @app.route('/')
 def index():
-    quote, author = random.choice(list(QUOTES.items()))
+    # Fetch a random quote from the API
+    response = requests.get("https://api.quotable.io/random", verify=False)
+
+    if response.status_code == 200:
+        data = response.json()
+        quote = data['content']
+        author = data['author']
+    else:
+        quote = "Could not fetch quote at this time."
+        author = "Unknown"
+        
     return render_template('index.html', quote=quote, author=author)
 
 @app.route("/quote")
 def quote():
-    quote, author = random.choice(list(QUOTES.items()))
+    # Fetch a random quote from the API
+    response = requests.get("https://api.quotable.io/random", verify=False)
+
+    if response.status_code == 200:
+        data = response.json()
+        quote = data['content']
+        author = data['author']
+    else:
+        quote = "Could not fetch quote at this time."
+        author = "Unknown"
     return render_template('quote.html', quote=quote, author=author)
 
 @app.route('/random-quote')
 def random_quote():
-    quote, author = random.choice(list(QUOTES.items()))
+    # Fetch a random quote from the API
+    response = requests.get("https://api.quotable.io/random", verify=False)
+
+    if response.status_code == 200:
+        data = response.json()
+        quote = data['content']
+        author = data['author']
+    else:
+        quote = "Could not fetch quote at this time."
+        author = "Unknown"
     return jsonify({"quote": quote, "author": author})
 
 @app.route('/add_favorite', methods=['POST'])
