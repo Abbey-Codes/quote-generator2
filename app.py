@@ -48,6 +48,19 @@ def add_favorite():
 
     return redirect(url_for('quote'))
 
+@app.route('/remove_favorite', methods=['POST'])
+def remove_favorite():
+    quote = request.form['quote']
+    author = request.form['author']
+
+    # remove the item from session favorites
+    if 'favorites' in session:
+        for favorite in session['favorites']:
+            if favorite['quote'] == quote and favorite['author'] == author:
+                session['favorites'].remove(favorite)
+                session.modified = True
+                break # stop after removing the matching quote
+    return redirect(url_for('favorite'))
 
 @app.route('/favorite')
 def favorite():

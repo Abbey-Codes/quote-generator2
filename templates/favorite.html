@@ -160,6 +160,11 @@
             <div class="quote-box" id="quote-box">
               <p class="quote-text" id="quote">"{{ favorite.quote }}"</p>
               <p class="quote-author" id="author">- {{ favorite.author }}</p>
+              <form action="{{ url_for('remove_favorite') }}" method="post">
+                    <input type="hidden" name="quote" value="{{ favorite.quote }}">
+                    <input type="hidden" name="author" value="{{ favorite.author }}">
+                    <button type="submit" style="color:red;">🗑️ Remove</button>
+              </form>
             </div>
           {% endfor%}
         {% else %}
@@ -170,9 +175,9 @@
 
   <!-- ===== FOOTER NAV ===== -->
   <footer>
-    <button class="footer-btn" onclick="window.location.href=''">Home</button>
-    <button class="footer-btn" onclick="window.location.href=''">Generate Quote</button>
-    <button class="footer-btn" onclick="window.location.href=''">About Us</button>
+    <button class="footer-btn" onclick="window.location.href='{{ url_for('index') }}'">Home</button>
+    <button class="footer-btn" onclick="window.location.href='{{ url_for('quote') }}'">Generate Quote</button>
+    <button class="footer-btn" onclick="window.location.href='{{ url_for('about') }}'">About Us</button>
   </footer>
 
   <script>
